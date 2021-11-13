@@ -10,18 +10,6 @@ export class DetallePedido extends Entity {
   Id?: string;
 
   @property({
-    type: 'string',
-    required: true,
-  })
-  Id_Pedido: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  Id_Producto: string;
-
-  @property({
     type: 'number',
     required: true,
   })

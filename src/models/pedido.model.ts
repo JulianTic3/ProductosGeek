@@ -21,12 +21,6 @@ export class Pedido extends Entity {
     type: 'number',
     required: true,
   })
-  Cantidad: number;
-
-  @property({
-    type: 'number',
-    required: true,
-  })
   Total: number;
 
   @property({
