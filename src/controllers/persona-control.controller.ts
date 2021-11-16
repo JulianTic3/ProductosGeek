@@ -17,8 +17,11 @@ import {
   del,
   requestBody,
   response,
+  HttpErrors,
 } from '@loopback/rest';
+import { Llaves } from '../config/llaves';
 import { Personas } from '../models';
+import { Credenciales } from '../models/credenciales.model';
 import { PersonasRepository } from '../repositories';
 import { AutenticacionService } from '../services';
 const fetch = require("node-fetch");
@@ -30,6 +33,32 @@ export class PersonaControlController {
     @service(AutenticacionService)
     public servicioAutenticacion: AutenticacionService,
   ) { }
+
+  @post("identificarPersona", {
+    responses: {
+      '200': {
+        description: "identificación de usuarios"
+      }
+    }
+  })
+  async identificarPersona(
+    @requestBody() credenciales: Credenciales
+  ) {
+    let p = await this.servicioAutenticacion.IdentificarPersona(credenciales.usuario, credenciales.clave);
+    if (p) {
+      let token = this.servicioAutenticacion.GenerarTokenJWT(p);
+      return {
+        datos: {
+          nombre: p.Nombre,
+          correo: p.Correo,
+          id: p.id
+        },
+        tk: token
+      }
+    } else {
+      throw new HttpErrors[401]("Datos inválidos")
+    }
+  }
 
   @post('/personas')
   @response(200, {
@@ -59,7 +88,7 @@ export class PersonaControlController {
     let destino = personas.Correo;
     let asunto = "Registro en la Aplicación GEEKJC";
     let contenido = `Hola ${personas.Nombre}, su usuario para ingresar a GEEKJC es: ${personas.Correo} y su contraseña es: ${clave}`;
-    fetch(`http://127.0.0.1:5000/email?correo_destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
+    fetch(`${Llaves.urlServicioNotificiones}/email?correo_destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
       .then((data: any) => {
         console.log(data);
       });
