@@ -1,3 +1,4 @@
+import { service } from '@loopback/core';
 import {
   Count,
   CountSchema,
@@ -17,19 +18,23 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Personas} from '../models';
-import {PersonasRepository} from '../repositories';
+import { Personas } from '../models';
+import { PersonasRepository } from '../repositories';
+import { AutenticacionService } from '../services';
+const fetch = require("node-fetch");
 
 export class PersonaControlController {
   constructor(
     @repository(PersonasRepository)
-    public personasRepository : PersonasRepository,
-  ) {}
+    public personasRepository: PersonasRepository,
+    @service(AutenticacionService)
+    public servicioAutenticacion: AutenticacionService,
+  ) { }
 
   @post('/personas')
   @response(200, {
     description: 'Personas model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Personas)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Personas) } },
   })
   async create(
     @requestBody({
@@ -44,13 +49,27 @@ export class PersonaControlController {
     })
     personas: Omit<Personas, 'id'>,
   ): Promise<Personas> {
-    return this.personasRepository.create(personas);
+
+    let clave = this.servicioAutenticacion.GenerarClave();
+    let claveCifrada = this.servicioAutenticacion.CifrarClave(clave);
+    personas.Clave = claveCifrada;
+    let p = await this.personasRepository.create(personas);
+
+    // notificación al usuario
+    let destino = personas.Correo;
+    let asunto = "Registro en la Aplicación GEEKJC";
+    let contenido = `Hola ${personas.Nombre}, su usuario para ingresar a GEEKJC es: ${personas.Correo} y su contraseña es: ${clave}`;
+    fetch(`http://127.0.0.1:5000/email?correo_destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
+      .then((data: any) => {
+        console.log(data);
+      });
+    return p;
   }
 
   @get('/personas/count')
   @response(200, {
     description: 'Personas model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Personas) where?: Where<Personas>,
@@ -65,7 +84,7 @@ export class PersonaControlController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Personas, {includeRelations: true}),
+          items: getModelSchemaRef(Personas, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +98,13 @@ export class PersonaControlController {
   @patch('/personas')
   @response(200, {
     description: 'Personas PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Personas, {partial: true}),
+          schema: getModelSchemaRef(Personas, { partial: true }),
         },
       },
     })
@@ -100,13 +119,13 @@ export class PersonaControlController {
     description: 'Personas model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Personas, {includeRelations: true}),
+        schema: getModelSchemaRef(Personas, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Personas, {exclude: 'where'}) filter?: FilterExcludingWhere<Personas>
+    @param.filter(Personas, { exclude: 'where' }) filter?: FilterExcludingWhere<Personas>
   ): Promise<Personas> {
     return this.personasRepository.findById(id, filter);
   }
@@ -120,7 +139,7 @@ export class PersonaControlController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Personas, {partial: true}),
+          schema: getModelSchemaRef(Personas, { partial: true }),
         },
       },
     })

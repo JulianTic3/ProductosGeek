@@ -42,7 +42,7 @@ export class Personas extends Entity {
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
   Clave: string;
 
@@ -66,7 +66,7 @@ export class Personas extends Entity {
 
   @property({
     type: 'date',
-    required: true,
+    required: false,
   })
   FechaNacimiento: string;
 
