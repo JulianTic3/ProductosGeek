@@ -1,5 +1,5 @@
-import {Entity, model, property, hasMany, belongsTo} from '@loopback/repository';
-import {Pedido} from './pedido.model';
+import { Entity, model, property, hasMany, belongsTo } from '@loopback/repository';
+import { Pedido } from './pedido.model';
 
 @model()
 export class Personas extends Entity {
@@ -73,6 +73,12 @@ export class Personas extends Entity {
   @property({
     type: 'string',
     required: true,
+  })
+  Celular: string;
+
+  @property({
+    type: 'string',
+    required: false,
   })
   Rol: string;
 
