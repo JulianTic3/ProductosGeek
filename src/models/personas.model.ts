@@ -1,4 +1,5 @@
-import { Entity, model, property, hasMany, belongsTo } from '@loopback/repository';
+import { Entity, model, property, hasMany, belongsTo, DateType } from '@loopback/repository';
+import { FormatInputPathObject } from 'path';
 import { Pedido } from './pedido.model';
 
 @model()

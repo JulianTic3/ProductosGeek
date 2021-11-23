@@ -88,7 +88,7 @@ export class PersonaControlController {
     let destino = personas.Correo;
     let asunto = "Registro en la Aplicación GEEKJC";
     let contenido = `Hola ${personas.Nombre}, su usuario para ingresar a GEEKJC es: ${personas.Correo} y su contraseña es: ${clave}`;
-    fetch(`${Llaves.urlServicioNotificiones}/email?correo_destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
+    fetch(`${Llaves.urlServicioNotificaciones}/email?correo_destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
       .then((data: any) => {
         console.log(data);
       });
