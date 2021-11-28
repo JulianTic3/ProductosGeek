@@ -11,5 +11,4 @@ export class CrearPersonaComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
