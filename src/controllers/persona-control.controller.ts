@@ -34,7 +34,7 @@ export class PersonaControlController {
     public servicioAutenticacion: AutenticacionService,
   ) { }
 
-  @post("identificarPersona", {
+  @post("/identificarPersona", {
     responses: {
       '200': {
         description: "identificación de usuarios"
