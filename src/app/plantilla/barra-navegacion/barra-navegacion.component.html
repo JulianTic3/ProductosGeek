@@ -1,21 +1,35 @@
 <nav>
   <div class="nav-wrapper cyan">
-    <a href="#!" class="brand-logo">Logo</a>
-    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <a routerLink="#!" class="brand-logo">Logo</a>
+    <a routerLink="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="inicio">Home<i class="material-icons left">home</i></a></li>
-      <li><a href="collapsible.html">Productos<i class="material-icons left">toys</i></a></li>
-      <li><a href="mobile.html">contacto<i class="material-icons left">contact_mail</i></a></li>
-      <li><a href="administracion/crear-persona">Registrarse<i class="material-icons left">add_circle</i></a></li>
-      <li><a href="seguridad/identificacion">Ingresar<i class="material-icons left">account_circle</i></a></li>
-      <li><a href="mobile.html">Carrito<i class="material-icons left">shopping_cart</i></a></li>
+      <li *ngIf="sesionIniciada"><a routerLink="inicio">Home<i class="material-icons left">home</i></a></li>
+      <li *ngIf="sesionIniciada"><a routerLink="inicio">Productos<i class="material-icons left">toys</i></a></li>
+      <li *ngIf="sesionIniciada"><a routerLink="inicio">contacto<i class="material-icons left">contact_mail</i></a></li>
+      <li *ngIf="sesionIniciada"><a routerLink="administracion/crear-persona">Registrarse<i
+            class="material-icons left">add_circle</i></a></li>
+      <li *ngIf="!sesionIniciada"><a routerLink="seguridad/identificacion">Iniciar Sesión<i
+            class="material-icons left">account_circle</i></a>
+      <li *ngIf="sesionIniciada"><a routerLink="seguridad/cerrar-sesion">Cerrar Sesión<i
+            class="material-icons left">power_settings_new</i></a>
+      </li>
+      <li *ngIf="sesionIniciada"><a routerLink="mobile.html">Carrito<i class="material-icons left">shopping_cart</i></a>
+      </li>
     </ul>
   </div>
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
-  <li><a href="sass.html">Sass</a></li>
-  <li><a href="badges.html">Components</a></li>
-  <li><a href="collapsible.html">Javascript</a></li>
-  <li><a href="mobile.html">Mobile</a></li>
+  <li *ngIf="sesionIniciada"><a routerLink="inicio">Home<i class="material-icons left">home</i></a></li>
+  <li *ngIf="sesionIniciada"><a routerLink="inicio">Productos<i class="material-icons left">toys</i></a></li>
+  <li *ngIf="sesionIniciada"><a routerLink="inicio">contacto<i class="material-icons left">contact_mail</i></a></li>
+  <li *ngIf="sesionIniciada"><a routerLink="administracion/crear-persona">Registrarse<i
+        class="material-icons left">add_circle</i></a></li>
+  <li *ngIf="!sesionIniciada"><a routerLink="seguridad/identificacion">Iniciar Sesión<i
+        class="material-icons left">account_circle</i></a>
+  <li *ngIf="sesionIniciada"><a routerLink="seguridad/cerrar-sesion">Cerrar Sesión<i
+        class="material-icons left">power_settings_new</i></a>
+  </li>
+  <li *ngIf="sesionIniciada"><a routerLink="mobile.html">Carrito<i class="material-icons left">shopping_cart</i></a>
+  </li>
 </ul>
