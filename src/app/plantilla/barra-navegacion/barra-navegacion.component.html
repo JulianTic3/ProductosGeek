@@ -1,35 +1,40 @@
 <nav>
-  <div class="nav-wrapper cyan">
-    <a routerLink="#!" class="brand-logo">Logo</a>
-    <a routerLink="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    <ul class="right hide-on-med-and-down">
+      <div class="nav-wrapper cyan">
+            <a routerLink="#!" class="brand-logo">Logo</a>
+            <a routerLink="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                  <li *ngIf="sesionIniciada"><a routerLink="/inicio">Home<i class="material-icons left">home</i></a></li>
+                  <li *ngIf="sesionIniciada"><a routerLink="/inicio">Productos<i class="material-icons left">toys</i></a>
+                  </li>
+                  <li *ngIf="sesionIniciada"><a routerLink="/inicio">contacto<i
+                                    class="material-icons left">contact_mail</i></a></li>
+                  <li *ngIf="sesionIniciada"><a routerLink="/administracion/crear-persona">Registrarse<i
+                                    class="material-icons left">add_circle</i></a></li>
+                  <li *ngIf="!sesionIniciada"><a routerLink="/seguridad/identificacion">Iniciar Sesión<i
+                                    class="material-icons left">account_circle</i></a>
+                  <li *ngIf="sesionIniciada"><a routerLink="/mobile.html">Carrito<i
+                                    class="material-icons left">shopping_cart</i></a>
+                  </li>
+                  <li *ngIf="sesionIniciada"><a routerLink="/seguridad/cerrar-sesion">Cerrar Sesión<i
+                                    class="material-icons left">power_settings_new</i></a>
+                  </li>
+
+            </ul>
+      </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
       <li *ngIf="sesionIniciada"><a routerLink="inicio">Home<i class="material-icons left">home</i></a></li>
       <li *ngIf="sesionIniciada"><a routerLink="inicio">Productos<i class="material-icons left">toys</i></a></li>
       <li *ngIf="sesionIniciada"><a routerLink="inicio">contacto<i class="material-icons left">contact_mail</i></a></li>
       <li *ngIf="sesionIniciada"><a routerLink="administracion/crear-persona">Registrarse<i
-            class="material-icons left">add_circle</i></a></li>
+                        class="material-icons left">add_circle</i></a></li>
       <li *ngIf="!sesionIniciada"><a routerLink="seguridad/identificacion">Iniciar Sesión<i
-            class="material-icons left">account_circle</i></a>
-      <li *ngIf="sesionIniciada"><a routerLink="seguridad/cerrar-sesion">Cerrar Sesión<i
-            class="material-icons left">power_settings_new</i></a>
-      </li>
+                        class="material-icons left">account_circle</i></a>
       <li *ngIf="sesionIniciada"><a routerLink="mobile.html">Carrito<i class="material-icons left">shopping_cart</i></a>
       </li>
-    </ul>
-  </div>
-</nav>
+      <li *ngIf="sesionIniciada"><a routerLink="seguridad/cerrar-sesion">Cerrar Sesión<i
+                        class="material-icons left">power_settings_new</i></a>
+      </li>
 
-<ul class="sidenav" id="mobile-demo">
-  <li *ngIf="sesionIniciada"><a routerLink="inicio">Home<i class="material-icons left">home</i></a></li>
-  <li *ngIf="sesionIniciada"><a routerLink="inicio">Productos<i class="material-icons left">toys</i></a></li>
-  <li *ngIf="sesionIniciada"><a routerLink="inicio">contacto<i class="material-icons left">contact_mail</i></a></li>
-  <li *ngIf="sesionIniciada"><a routerLink="administracion/crear-persona">Registrarse<i
-        class="material-icons left">add_circle</i></a></li>
-  <li *ngIf="!sesionIniciada"><a routerLink="seguridad/identificacion">Iniciar Sesión<i
-        class="material-icons left">account_circle</i></a>
-  <li *ngIf="sesionIniciada"><a routerLink="seguridad/cerrar-sesion">Cerrar Sesión<i
-        class="material-icons left">power_settings_new</i></a>
-  </li>
-  <li *ngIf="sesionIniciada"><a routerLink="mobile.html">Carrito<i class="material-icons left">shopping_cart</i></a>
-  </li>
 </ul>

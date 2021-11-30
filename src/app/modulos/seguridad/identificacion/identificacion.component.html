@@ -2,6 +2,7 @@
   <div class="col s12 l4 offset-l4">
     <div class="card blue lighten-5">
       <div class="card-content">
+        <h1 class="center">GeekJC</h1>
         <h4 class="card-title center-align strong">Identificación de Usuario</h4>
         <br>
         <form [formGroup]="fgValidador" (ngSubmit)="identificarUsuario()">
@@ -17,13 +18,13 @@
               <i class="material-icons prefix">vpn_key</i>
               <input formControlName="clave" id="password" type="password" class="validate">
               <label for="password">Contraseña</label>
-              <a class="waves-effect waves-teal btn-flat col s6" href="seguridad/cambio-clave">Cambiar Contraseña</a>
-              <a class="waves-effect waves-teal btn-flat col s5" href="seguridad/recuperar-clave">Olvidé mi
+              <a class="waves-effect waves-teal col s5 offset-s1" href="seguridad/cambio-clave">Cambiar Contraseña</a>
+              <a class="waves-effect waves-teal col s5 offset-s1" href="seguridad/recuperar-clave">Olvidé mi
                 Contraseña</a>
             </div>
           </div>
           <div class="row center-align">
-            <button [disabled]="!fgValidador.valid" class="btn-large btn waves-effect waves-light" type="submit"
+            <button [disabled]="!fgValidador.valid" class="btn-large btn waves-effect cyan waves-light" type="submit"
               name="action">Ingresar
               <i class="material-icons right">account_box</i>
             </button>
