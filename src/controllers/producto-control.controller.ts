@@ -62,6 +62,7 @@ export class ProductoControlController {
     return this.productoRepository.count(where);
   }
 
+  @authenticate.skip()
   @get('/productos')
   @response(200, {
     description: 'Array of Producto model instances',
